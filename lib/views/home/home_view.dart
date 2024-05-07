@@ -1,8 +1,8 @@
-import 'package:test_task_app/views/home/widgets/task_widget.dart';
-import 'package:test_task_app/views/task/task_view.dart';
-
 import '../../constants/constants.dart';
 import '../common_widgets/create_app_bar_widget.dart';
+import '../task/task_create_view.dart';
+import '../task/task_view.dart';
+import 'widgets/task_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -13,7 +13,9 @@ class HomeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add_rounded),
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => TaskCreateView());
+        },
       ),
       appBar: createAppBarWidget(title: homeTitle, implyLeading: false),
       body: SafeArea(
