@@ -1,4 +1,5 @@
 import 'package:test_task_app/views/home/widgets/task_widget.dart';
+import 'package:test_task_app/views/task/task_view.dart';
 
 import '../../constants/constants.dart';
 import '../common_widgets/create_app_bar_widget.dart';
@@ -19,9 +20,13 @@ class HomeView extends StatelessWidget {
         child: ListView.builder(
             itemCount: 4,
             itemBuilder: (BuildContext context, int index) {
-              return const Padding(
-                padding: EdgeInsets.all(8.0),
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: TaskWidget(
+                  onPressed: () {
+                    Get.to(() => const TaskView(title: 'Coding'),
+                        transition: Transition.rightToLeftWithFade);
+                  },
                   title: 'No title',
                   type: TaskType.codeRelated,
                 ),
