@@ -30,7 +30,7 @@ class DurationSelector extends StatelessWidget {
                 controller: taskController.hourController,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  taskController.selectedHours = int.tryParse(value) ?? 0;
+                  taskController.selectedHours.value = int.tryParse(value) ?? 0;
                 },
                 decoration: InputDecoration(labelText: 'Hours'),
               ),
@@ -42,7 +42,8 @@ class DurationSelector extends StatelessWidget {
                 controller: taskController.minutesController,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  taskController.selectedMinutes = int.tryParse(value) ?? 0;
+                  taskController.selectedMinutes.value =
+                      int.tryParse(value) ?? 0;
                 },
                 decoration: InputDecoration(labelText: 'Minutes'),
               ),

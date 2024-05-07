@@ -39,10 +39,10 @@ class TaskCreateView extends StatelessWidget {
             const DurationSelector(),
             const SizedBox(height: 16.0),
             DropdownButtonFormField(
-              value: taskController.selectedTaskType,
+              value: taskController.selectedTaskType.value,
               items: taskController.getDropDownmenuItem(),
               onChanged: (newValue) {
-                taskController.selectedTaskType = newValue;
+                taskController.selectedTaskType(newValue);
               },
               decoration: const InputDecoration(labelText: 'Task Type'),
             ),
