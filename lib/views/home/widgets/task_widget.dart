@@ -1,4 +1,8 @@
+import 'package:test_task_app/views/common_widgets/play_pause_button.dart';
+import 'package:test_task_app/views/common_widgets/timer_widget.dart';
+
 import '../../../constants/constants.dart';
+import '../../../helpers/helper.dart';
 import 'tags_widget.dart';
 import 'task_icon.dart';
 import 'task_title.dart';
@@ -28,8 +32,11 @@ class TaskWidget extends StatelessWidget {
         children: <Widget>[
           TaskIcon(icon: getIcon(type) ?? Icons.sticky_note_2),
           Container(
-            constraints: const BoxConstraints(
-                maxHeight: 100, minWidth: 130, maxWidth: 300, minHeight: 100),
+            constraints: BoxConstraints(
+                maxHeight: 100,
+                minWidth: 80,
+                maxWidth: MediaQuery.of(context).size.width * 0.6,
+                minHeight: 100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,21 +48,15 @@ class TaskWidget extends StatelessWidget {
               ],
             ),
           ),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TimerWidget(),
+              PlayPauseButton(isPlaying: true),
+            ],
+          )
         ],
       ),
     );
-  }
-}
-
-IconData? getIcon(type) {
-  switch (type) {
-    case TaskType.uiRelated:
-      return Icons.design_services_outlined;
-    case TaskType.codeRelated:
-      return Icons.code_outlined;
-    case TaskType.analysis:
-      return Icons.analytics;
-    case TaskType.other:
-      return Icons.sticky_note_2_rounded;
   }
 }

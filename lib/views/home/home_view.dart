@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: TaskWidget(
                   title: 'No title',
-                  type: TaskType.analysis,
+                  type: TaskType.codeRelated,
                 ),
               );
             }),
