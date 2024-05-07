@@ -51,7 +51,7 @@ class TaskWidget extends StatelessWidget {
           const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TimerWidget(),
+              TimerWidget(time: '12:00'),
               PlayPauseButton(isPlaying: true),
             ],
           )

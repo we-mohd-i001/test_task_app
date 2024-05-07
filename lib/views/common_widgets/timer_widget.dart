@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TimerWidget extends StatelessWidget {
-  const TimerWidget({super.key});
+  final String time;
+  const TimerWidget({super.key, required this.time});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Timer"),
+      child: Text(time),
     );
   }
 }
