@@ -1,5 +1,7 @@
-import '../../constants/constants.dart';
-import '../../controllers/task/create_task_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/task/task_controller.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import 'widgets/duration_selector.dart';
 

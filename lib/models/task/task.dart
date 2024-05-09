@@ -1,4 +1,4 @@
-import '../../constants/constants.dart';
+import 'task_type.dart';
 
 class Task {
   final String id;

@@ -1,32 +1,24 @@
-import '../../../constants/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../../controllers/timer/timer_controller.dart';
 import '../../../helpers/helper.dart';
+import '../../../models/task/task.dart';
 import '../../common_widgets/play_pause_button.dart';
 import '../../common_widgets/timer_widget.dart';
+import '../../task/task_view.dart';
 import 'description_widget.dart';
 import 'task_icon.dart';
 import 'task_title.dart';
 
 class TaskWidget extends StatelessWidget {
-  final String title;
-  final TaskType type;
-  final String description;
-  final int hours;
-  final int minutes;
-  final int seconds;
-  final void Function()? onPressed;
+  final Task task;
   final int index;
 
   const TaskWidget({
     super.key,
-    required this.title,
-    required this.description,
-    required this.hours,
-    required this.minutes,
-    required this.seconds,
-    required this.type,
-    this.onPressed,
     required this.index,
+    required this.task,
   });
 
   @override
@@ -34,7 +26,15 @@ class TaskWidget extends StatelessWidget {
     TimerController timerController = Get.put(TimerController());
     return MaterialButton(
       padding: EdgeInsets.zero,
-      onPressed: onPressed ?? () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          TaskView.route(
+            task: task,
+            index: index,
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         constraints: const BoxConstraints(
@@ -49,7 +49,7 @@ class TaskWidget extends StatelessWidget {
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            TaskIcon(icon: getIcon(type) ?? Icons.sticky_note_2),
+            TaskIcon(icon: getIcon(task.type) ?? Icons.sticky_note_2),
             const SizedBox(width: 10),
             Expanded(
               child: Container(
@@ -62,9 +62,9 @@ class TaskWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    TaskTitle(title: title),
+                    TaskTitle(title: task.title),
                     DescriptionWidget(
-                      description: description,
+                      description: task.description,
                     ),
                   ],
                 ),
@@ -76,12 +76,12 @@ class TaskWidget extends StatelessWidget {
                 Obx(() => TimerWidget(
                     time: (timerController.runningTaskId.value == -1 ||
                             timerController.runningTaskId.value != index)
-                        ? '$hours:$minutes:$seconds'
+                        ? '${task.hours}:${task.minutes}:${task.seconds}'
                         : timerController.getTimeDurationString.value)),
                 Obx(
                   () => PlayPauseButton(
-                      onPressed: () =>
-                          timerController.playPauseTimer(index, minutes, hours),
+                      onPressed: () => timerController.playPauseTimer(
+                          index, task.minutes, task.hours),
                       isPlaying: timerController.runningTaskId.value == -1
                           ? false
                           : timerController.isTimerRunning.value &&

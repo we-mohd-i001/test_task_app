@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:test_task_app/constants/constants.dart';
 
 import '../../models/task/task.dart';
-import '../task/create_task_controller.dart';
+import '../task/task_controller.dart';
 
 class TimerController extends GetxController {
   TaskController taskController = Get.find<TaskController>();

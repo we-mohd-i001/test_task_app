@@ -1,44 +1,33 @@
-import '../../constants/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../controllers/timer/timer_controller.dart';
+import '../../models/task/task.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import '../common_widgets/play_pause_button.dart';
 import '../common_widgets/timer_widget.dart';
 
 class TaskView extends StatelessWidget {
-  final String title;
-  final String description;
+  final Task task;
   final int index;
-  final int hours;
-  final int minutes;
-  final int seconds;
-  const TaskView(
-      {super.key,
-      required this.title,
-      required this.index,
-      required this.hours,
-      required this.minutes,
-      required this.seconds,
-      required this.description});
+
+  const TaskView({
+    super.key,
+    required this.index,
+    required this.task,
+  });
 
   static Route<void> route({
-    required String title,
-    required String description,
+    required Task task,
     required int index,
-    required int hours,
-    required int minutes,
-    required int seconds,
   }) {
     _initialize();
 
     return MaterialPageRoute(
       settings: const RouteSettings(name: '/task'),
       builder: (_) => TaskView(
-        title: title,
+        task: task,
         index: index,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-        description: description,
       ),
     );
   }
@@ -54,7 +43,7 @@ class TaskView extends StatelessWidget {
     TimerController timerController = Get.find<TimerController>();
     return Scaffold(
       appBar: createAppBarWidget(
-          title: title, onPressed: () => Navigator.pop(context)),
+          title: task.title, onPressed: () => Navigator.pop(context)),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -62,7 +51,7 @@ class TaskView extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(description),
+                child: Text(task.description),
               ),
             ),
             Align(
@@ -97,8 +86,8 @@ class TaskView extends StatelessWidget {
                 ),
                 child: Obx(
                   () => PlayPauseButton(
-                    onPressed: () =>
-                        timerController.playPauseTimer(index, minutes, hours),
+                    onPressed: () => timerController.playPauseTimer(
+                        index, task.minutes, task.hours),
                     size: 40,
                     isPlaying: timerController.runningTaskId.value == -1
                         ? false

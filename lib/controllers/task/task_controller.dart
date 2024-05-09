@@ -1,5 +1,8 @@
-import '../../constants/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../models/task/task.dart';
+import '../../models/task/task_type.dart';
 
 class TaskController extends GetxController {
   RxList<Task> taskList = <Task>[].obs;

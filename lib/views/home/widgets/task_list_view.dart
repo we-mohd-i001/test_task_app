@@ -1,6 +1,7 @@
-import '../../../constants/constants.dart';
-import '../../../controllers/task/create_task_controller.dart';
-import '../../task/task_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../controllers/task/task_controller.dart';
 import 'task_widget.dart';
 
 class TaskListView extends StatelessWidget {
@@ -16,26 +17,8 @@ class TaskListView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: TaskWidget(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    TaskView.route(
-                      title: taskController.taskList[index].title,
-                      index: index,
-                      hours: taskController.taskList[index].hours,
-                      minutes: taskController.taskList[index].minutes,
-                      seconds: taskController.taskList[index].seconds,
-                      description: taskController.taskList[index].description,
-                    ),
-                  );
-                },
-                title: taskController.taskList[index].title,
-                description: taskController.taskList[index].description,
-                type: taskController.taskList[index].type,
+                task: taskController.taskList[index],
                 index: index,
-                hours: taskController.taskList[index].hours,
-                minutes: taskController.taskList[index].minutes,
-                seconds: taskController.taskList[index].seconds,
               ),
             );
           }),

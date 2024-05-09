@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../constants/constants.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import '../task/task_create_view.dart';
@@ -17,7 +19,7 @@ class HomeView extends StatelessWidget {
         },
       ),
       appBar: createAppBarWidget(title: homeTitle, implyLeading: false),
-      body: const SafeArea(child: TaskListView()),
+      body: SafeArea(child: TaskListView()),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/task/create_task_controller.dart';
+import '../../../controllers/task/task_controller.dart';
 
 class DurationSelector extends StatelessWidget {
   const DurationSelector({
