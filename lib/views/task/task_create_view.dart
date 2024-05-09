@@ -1,5 +1,5 @@
 import '../../constants/constants.dart';
-import '../../controllers/task/task_controller.dart';
+import '../../controllers/task/create_task_controller.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import 'widgets/duration_selector.dart';
 
@@ -8,6 +8,7 @@ class TaskCreateView extends StatelessWidget {
 
   static Route<void> route() {
     _initialize();
+
     return MaterialPageRoute(
       settings: const RouteSettings(name: '/create'),
       builder: (_) => const TaskCreateView(),
@@ -23,6 +24,7 @@ class TaskCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TaskController taskController = Get.find<TaskController>();
+    taskController.clearFields();
     return Scaffold(
       appBar: createAppBarWidget(
           title: 'Create a new Task', onPressed: () => Get.back()),
@@ -36,42 +38,28 @@ class TaskCreateView extends StatelessWidget {
               decoration: const InputDecoration(labelText: 'Title'),
             ),
             const SizedBox(height: 16.0),
-            const DurationSelector(),
+            TextField(
+              controller: taskController.descriptionController,
+              decoration: const InputDecoration(labelText: 'Description'),
+            ),
             const SizedBox(height: 16.0),
+            const DurationSelector(),
             DropdownButtonFormField(
               value: taskController.selectedTaskType.value,
-              items: taskController.getDropDownmenuItem(),
+              items: taskController.getDropDownMenuItem(),
               onChanged: (newValue) {
                 taskController.selectedTaskType(newValue);
               },
               decoration: const InputDecoration(labelText: 'Task Type'),
             ),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: taskController.tagController,
-              onSubmitted: (value) {
-                taskController.tags.add(value);
-                taskController.tagController.clear();
-              },
-              decoration: const InputDecoration(labelText: 'Add Tag'),
-            ),
-            const SizedBox(height: 16.0),
-            Obx(
-              () => Wrap(
-                spacing: 8.0,
-                children: taskController.tags.map((tag) {
-                  return Chip(
-                    label: Text(tag),
-                    onDeleted: () {
-                      taskController.tags.remove(tag);
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                taskController.createTask();
+                //
+                Navigator.pop(context);
+              },
               child: const Text('Create Task'),
             ),
           ],

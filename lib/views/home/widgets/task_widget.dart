@@ -1,27 +1,37 @@
-import 'package:test_task_app/views/common_widgets/play_pause_button.dart';
-import 'package:test_task_app/views/common_widgets/timer_widget.dart';
-
 import '../../../constants/constants.dart';
+import '../../../controllers/timer/timer_controller.dart';
 import '../../../helpers/helper.dart';
-import 'tags_widget.dart';
+import '../../common_widgets/play_pause_button.dart';
+import '../../common_widgets/timer_widget.dart';
+import 'description_widget.dart';
 import 'task_icon.dart';
 import 'task_title.dart';
 
 class TaskWidget extends StatelessWidget {
   final String title;
   final TaskType type;
-  final List<String>? tags;
+  final String description;
+  final int hours;
+  final int minutes;
+  final int seconds;
   final void Function()? onPressed;
+  final int index;
 
-  const TaskWidget(
-      {super.key,
-      required this.title,
-      this.tags,
-      required this.type,
-      this.onPressed});
+  const TaskWidget({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.hours,
+    required this.minutes,
+    required this.seconds,
+    required this.type,
+    this.onPressed,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
+    TimerController timerController = Get.put(TimerController());
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed ?? () {},
@@ -37,31 +47,46 @@ class TaskWidget extends StatelessWidget {
           color: Colors.blue,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TaskIcon(icon: getIcon(type) ?? Icons.sticky_note_2),
-            Container(
-              constraints: BoxConstraints(
-                  maxHeight: 100,
-                  minWidth: 80,
-                  maxWidth: MediaQuery.of(context).size.width * 0.6,
-                  minHeight: 100),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  TaskTitle(title: title),
-                  const TagsWidget(
-                    tags: ['Computer', 'Science', 'Flutter'],
-                  ),
-                ],
+            const SizedBox(width: 10),
+            Expanded(
+              child: Container(
+                constraints: BoxConstraints(
+                    maxHeight: 100,
+                    minWidth: 80,
+                    maxWidth: MediaQuery.of(context).size.width * 0.6,
+                    minHeight: 100),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    TaskTitle(title: title),
+                    DescriptionWidget(
+                      description: description,
+                    ),
+                  ],
+                ),
               ),
             ),
-            const Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TimerWidget(time: '12:00'),
-                PlayPauseButton(isPlaying: true),
+                Obx(() => TimerWidget(
+                    time: (timerController.runningTaskId.value == -1 ||
+                            timerController.runningTaskId.value != index)
+                        ? '$hours:$minutes:$seconds'
+                        : timerController.getTimeDurationString.value)),
+                Obx(
+                  () => PlayPauseButton(
+                      onPressed: () =>
+                          timerController.playPauseTimer(index, minutes, hours),
+                      isPlaying: timerController.runningTaskId.value == -1
+                          ? false
+                          : timerController.isTimerRunning.value &&
+                              timerController.runningTaskId.value == index),
+                ),
               ],
             )
           ],
