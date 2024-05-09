@@ -15,15 +15,13 @@ class TimerController extends GetxController {
   late Timer timer;
 
   void playPauseTimer(
-    index,
-    minutesFrom,
-    hoursFrom,
-  ) {
+      int index, int minutesFrom, int hoursFrom, int secondsFrom) {
     if (runningTaskId.value == -1) {
       runningTaskId(index);
       isTimerRunning(true);
       minutes.value = minutesFrom;
       hours.value = hoursFrom;
+      seconds.value = secondsFrom;
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (seconds.value == 0) {
           if (minutes.value == 0) {

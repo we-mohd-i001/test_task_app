@@ -88,7 +88,11 @@ class TaskView extends StatelessWidget {
                 child: Obx(
                   () => PlayPauseButton(
                     onPressed: () => timerController.playPauseTimer(
-                        index, task.minutes, task.hours),
+                      index,
+                      task.minutes,
+                      task.hours,
+                      task.seconds,
+                    ),
                     size: 40,
                     isPlaying: timerController.runningTaskId.value == -1
                         ? false
