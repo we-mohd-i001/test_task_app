@@ -17,19 +17,18 @@ class TaskList extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: TaskWidget(
                 onPressed: () {
-                  Get.to(
-                      () => TaskView(
-                            title: createTaskController.taskList[index].title,
-                            index: index,
-                            hours: createTaskController.taskList[index].hours,
-                            minutes:
-                                createTaskController.taskList[index].minutes,
-                            seconds:
-                                createTaskController.taskList[index].seconds,
-                            description: createTaskController
-                                .taskList[index].description,
-                          ),
-                      transition: Transition.rightToLeftWithFade);
+                  Navigator.push(
+                    context,
+                    TaskView.route(
+                      title: createTaskController.taskList[index].title,
+                      index: index,
+                      hours: createTaskController.taskList[index].hours,
+                      minutes: createTaskController.taskList[index].minutes,
+                      seconds: createTaskController.taskList[index].seconds,
+                      description:
+                          createTaskController.taskList[index].description,
+                    ),
+                  );
                 },
                 title: createTaskController.taskList[index].title,
                 description: createTaskController.taskList[index].description,

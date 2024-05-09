@@ -31,7 +31,7 @@ class TaskView extends StatelessWidget {
     _initialize();
 
     return MaterialPageRoute(
-      settings: const RouteSettings(name: '/create'),
+      settings: const RouteSettings(name: '/task'),
       builder: (_) => TaskView(
         title: title,
         index: index,
