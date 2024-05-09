@@ -53,7 +53,8 @@ class TaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     TimerController timerController = Get.find<TimerController>();
     return Scaffold(
-      appBar: createAppBarWidget(title: title, onPressed: () => Get.back()),
+      appBar: createAppBarWidget(
+          title: title, onPressed: () => Navigator.pop(context)),
       body: SafeArea(
         child: Stack(
           children: <Widget>[

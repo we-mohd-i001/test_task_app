@@ -27,7 +27,7 @@ class TaskCreateView extends StatelessWidget {
     taskController.clearFields();
     return Scaffold(
       appBar: createAppBarWidget(
-          title: 'Create a new Task', onPressed: () => Get.back()),
+          title: 'Create a new Task', onPressed: () => Navigator.pop(context)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
