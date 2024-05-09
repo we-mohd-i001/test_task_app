@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
 
-PreferredSizeWidget? createAppBarWidget(
-    {bool? implyLeading,
-    void Function()? onPressed,
-    required String title,
-    List<Widget>? actions}) {
+PreferredSizeWidget? createAppBarWidget({
+  bool implyLeading = true,
+  required String title,
+  void Function()? onPressed,
+  List<Widget>? actions,
+}) {
   return AppBar(
-    automaticallyImplyLeading: implyLeading ?? true,
-    leading: implyLeading ?? true
+    automaticallyImplyLeading: implyLeading,
+    leading: implyLeading
         ? IconButton(
             tooltip: back,
             icon: const Icon(Icons.arrow_back),
-            onPressed: onPressed ?? () {},
+            onPressed: onPressed,
           )
         : null,
     title: Text(
@@ -23,6 +24,6 @@ PreferredSizeWidget? createAppBarWidget(
         fontWeight: FontWeight.w600,
       ),
     ),
-    actions: actions ?? [],
+    actions: actions,
   );
 }

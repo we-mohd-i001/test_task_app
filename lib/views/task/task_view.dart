@@ -59,10 +59,11 @@ class TaskView extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 constraints: const BoxConstraints(
-                    maxHeight: 100,
-                    minHeight: 100,
-                    minWidth: 100,
-                    maxWidth: 260),
+                  maxHeight: 100,
+                  minHeight: 100,
+                  minWidth: 100,
+                  maxWidth: 260,
+                ),
                 child: Obx(
                   () => TimerWidget(
                       fontSize: 56,

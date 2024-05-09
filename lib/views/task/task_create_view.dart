@@ -10,7 +10,6 @@ class TaskCreateView extends StatelessWidget {
 
   static Route<void> route() {
     _initialize();
-
     return MaterialPageRoute(
       settings: const RouteSettings(name: '/create'),
       builder: (_) => const TaskCreateView(),
@@ -29,7 +28,9 @@ class TaskCreateView extends StatelessWidget {
     taskController.clearFields();
     return Scaffold(
       appBar: createAppBarWidget(
-          title: 'Create a new Task', onPressed: () => Navigator.pop(context)),
+        title: 'Create a new Task',
+        onPressed: () => Navigator.pop(context),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -55,11 +56,9 @@ class TaskCreateView extends StatelessWidget {
               decoration: const InputDecoration(labelText: 'Task Type'),
             ),
             const SizedBox(height: 16.0),
-            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 taskController.createTask();
-                //
                 Navigator.pop(context);
               },
               child: const Text('Create Task'),

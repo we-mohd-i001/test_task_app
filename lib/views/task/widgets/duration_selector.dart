@@ -13,12 +13,14 @@ class DurationSelector extends StatelessWidget {
     final TaskController taskController = Get.find<TaskController>();
     return Column(
       children: [
-        Obx(() => Row(
-              children: <Widget>[
-                Text(
-                    'Duration: ${taskController.selectedHours} hours ${taskController.selectedMinutes} minutes'),
-              ],
-            )),
+        Obx(
+          () => Row(
+            children: <Widget>[
+              Text('Duration: ${taskController.selectedHours} hours'
+                  ' ${taskController.selectedMinutes} minutes'),
+            ],
+          ),
+        ),
         const SizedBox(height: 16.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
         },
       ),
       appBar: createAppBarWidget(title: homeTitle, implyLeading: false),
-      body: SafeArea(child: TaskListView()),
+      body: const SafeArea(child: TaskListView()),
     );
   }
 }
