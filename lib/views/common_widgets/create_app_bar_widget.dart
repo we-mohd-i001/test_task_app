@@ -12,7 +12,7 @@ PreferredSizeWidget? createAppBarWidget({
     automaticallyImplyLeading: implyLeading,
     leading: implyLeading
         ? IconButton(
-            tooltip: back,
+            tooltip: AppStrings.back,
             icon: const Icon(Icons.arrow_back),
             onPressed: onPressed,
           )

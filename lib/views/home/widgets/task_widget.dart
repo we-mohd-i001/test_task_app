@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../controllers/task/task_controller.dart';
 import '../../../controllers/timer/timer_controller.dart';
 import '../../../helpers/task_icon_helper.dart';
-import '../../../models/task/task.dart';
 import '../../common_widgets/play_pause_button.dart';
 import '../../common_widgets/timer_widget.dart';
 import '../../task/task_view.dart';

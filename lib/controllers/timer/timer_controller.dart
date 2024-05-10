@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+import '../../constants/constants.dart';
 import '../../models/task/task.dart';
 import '../task/task_controller.dart';
 
@@ -45,9 +46,10 @@ class TimerController extends GetxController {
         taskController.upateTask(newTask, index);
       });
     } else if (runningTaskId.value != index && isTimerRunning.value) {
-      Get.snackbar('Cannot Start Timer', 'Another Timer Running!',
+      Get.snackbar(
+          AppStrings.startTimerFailedTitle, AppStrings.startTimerFailedMessage,
           snackPosition: SnackPosition.BOTTOM);
-    } else if (runningTaskId == index) {
+    } else if (runningTaskId.value == index) {
       isTimerRunning(false);
       runningTaskId(-1);
       timer.cancel();

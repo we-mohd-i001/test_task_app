@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants/constants.dart';
 import '../../../controllers/task/task_controller.dart';
 
 class DurationSelector extends StatelessWidget {
@@ -16,8 +17,9 @@ class DurationSelector extends StatelessWidget {
         Obx(
           () => Row(
             children: <Widget>[
-              Text('Duration: ${taskController.selectedHours} hours'
-                  ' ${taskController.selectedMinutes} minutes'),
+              Text(
+                  '${AppStrings.duration}: ${taskController.selectedHours} ${AppStrings.hours}'
+                  ' ${taskController.selectedMinutes} ${AppStrings.minutes}'),
             ],
           ),
         ),
@@ -34,7 +36,7 @@ class DurationSelector extends StatelessWidget {
                 onChanged: (value) {
                   taskController.selectedHours.value = int.tryParse(value) ?? 0;
                 },
-                decoration: const InputDecoration(labelText: 'Hours'),
+                decoration: const InputDecoration(labelText: AppStrings.hours),
               ),
             ),
             SizedBox(
@@ -47,7 +49,8 @@ class DurationSelector extends StatelessWidget {
                   taskController.selectedMinutes.value =
                       int.tryParse(value) ?? 0;
                 },
-                decoration: const InputDecoration(labelText: 'Minutes'),
+                decoration:
+                    const InputDecoration(labelText: AppStrings.minutes),
               ),
             ),
           ],

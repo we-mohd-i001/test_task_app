@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constants/constants.dart';
 import '../../controllers/task/task_controller.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import 'widgets/duration_selector.dart';
@@ -28,7 +29,7 @@ class TaskCreateView extends StatelessWidget {
     taskController.clearFields();
     return Scaffold(
       appBar: createAppBarWidget(
-        title: 'Create a new Task',
+        title: AppStrings.createANewTask,
         onPressed: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(
@@ -38,12 +39,13 @@ class TaskCreateView extends StatelessWidget {
           children: <Widget>[
             TextField(
               controller: taskController.titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: AppStrings.title),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: taskController.descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration:
+                  const InputDecoration(labelText: AppStrings.description),
             ),
             const SizedBox(height: 16.0),
             const DurationSelector(),
@@ -53,7 +55,7 @@ class TaskCreateView extends StatelessWidget {
               onChanged: (newValue) {
                 taskController.selectedTaskType(newValue);
               },
-              decoration: const InputDecoration(labelText: 'Task Type'),
+              decoration: const InputDecoration(labelText: AppStrings.taskType),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
@@ -61,7 +63,7 @@ class TaskCreateView extends StatelessWidget {
                 taskController.createTask();
                 Navigator.pop(context);
               },
-              child: const Text('Create Task'),
+              child: const Text(AppStrings.createTask),
             ),
           ],
         ),

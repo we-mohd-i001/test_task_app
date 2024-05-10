@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constants/constants.dart';
 import '../../controllers/timer/timer_controller.dart';
 import '../../models/task/task.dart';
 import '../common_widgets/create_app_bar_widget.dart';
@@ -69,7 +70,7 @@ class TaskView extends StatelessWidget {
                       fontSize: 56,
                       time: (timerController.runningTaskId.value == -1 ||
                               timerController.runningTaskId.value != index)
-                          ? 'Paused'
+                          ? AppStrings.paused
                           : timerController.getTimeDurationString.value),
                 ),
               ),

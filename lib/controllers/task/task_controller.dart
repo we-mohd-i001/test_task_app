@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constants/constants.dart';
+import '../../helpers/task_type_helper.dart';
 import '../../models/task/task.dart';
-import '../../models/task/task_type.dart';
 import 'task_list_controller.dart';
 
 class TaskController extends GetxController {
@@ -20,7 +21,7 @@ class TaskController extends GetxController {
     Task task = Task(
       id: '',
       title: titleController.text,
-      type: taskType,
+      type: taskType(selectedTaskType.value),
       description: description,
       hours: selectedHours.value,
       minutes: selectedMinutes.value,
@@ -38,27 +39,12 @@ class TaskController extends GetxController {
     return descriptionController.text;
   }
 
-  TaskType get taskType {
-    switch (selectedTaskType.value) {
-      case 'Code Related':
-        return TaskType.codeRelated;
-      case 'UI Related':
-        return TaskType.uiRelated;
-      case 'Analysis':
-        return TaskType.analysis;
-      case 'Other':
-        return TaskType.other;
-      default:
-        return TaskType.other;
-    }
-  }
-
   List<DropdownMenuItem<String>>? getDropDownMenuItem() {
     final List<String> dropDownItems = [
-      'Code Related',
-      'UI Related',
-      'Analysis',
-      'Other'
+      AppStrings.codeRelated,
+      AppStrings.uiRelated,
+      AppStrings.analysis,
+      AppStrings.other,
     ];
     return dropDownItems.map<DropdownMenuItem<String>>((String value) {
       return DropdownMenuItem<String>(
@@ -73,7 +59,7 @@ class TaskController extends GetxController {
     descriptionController.clear();
     hourController.clear();
     minutesController.clear();
-    selectedTaskType.value = 'Other';
+    selectedTaskType.value = AppStrings.other;
     selectedHours.value = 0;
     selectedMinutes.value = 0;
   }

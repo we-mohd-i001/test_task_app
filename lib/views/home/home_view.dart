@@ -18,7 +18,8 @@ class HomeView extends StatelessWidget {
           Navigator.push(context, TaskCreateView.route());
         },
       ),
-      appBar: createAppBarWidget(title: homeTitle, implyLeading: false),
+      appBar:
+          createAppBarWidget(title: AppStrings.homeTitle, implyLeading: false),
       body: const SafeArea(child: TaskListView()),
     );
   }
