@@ -15,4 +15,5 @@ class AppStrings {
   static const String description = 'Description';
   static const String taskType = 'Task Type';
   static const String createTask = 'Create Task';
+  static const String paused = 'Paused';
 }

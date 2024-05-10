@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants/constants.dart';
 import '../../../controllers/task/task_controller.dart';
 import '../../../controllers/timer/timer_controller.dart';
 import '../../../helpers/task_icon_helper.dart';
@@ -48,7 +49,7 @@ class TaskWidget extends StatelessWidget {
         child: Row(
           children: <Widget>[
             TaskIcon(icon: getIcon(taskController.taskList[taskId].type)),
-            const SizedBox(width: 10),
+            Margins.horizontalMargin10,
             Expanded(
               child: Container(
                 constraints: BoxConstraints(

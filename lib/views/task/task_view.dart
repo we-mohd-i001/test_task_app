@@ -94,7 +94,7 @@ class TaskView extends StatelessWidget {
                       task.hours,
                       task.seconds,
                     ),
-                    size: 40,
+                    size: FontSizes.extraLarge,
                     isPlaying: timerController.runningTaskId.value == -1
                         ? false
                         : timerController.isTimerRunning.value &&

@@ -23,7 +23,7 @@ class DurationSelector extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 16.0),
+        Margins.verticalMargin16,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

@@ -41,13 +41,13 @@ class TaskCreateView extends StatelessWidget {
               controller: taskController.titleController,
               decoration: const InputDecoration(labelText: AppStrings.title),
             ),
-            const SizedBox(height: 16.0),
+            Margins.verticalMargin16,
             TextField(
               controller: taskController.descriptionController,
               decoration:
                   const InputDecoration(labelText: AppStrings.description),
             ),
-            const SizedBox(height: 16.0),
+            Margins.verticalMargin16,
             const DurationSelector(),
             DropdownButtonFormField(
               value: taskController.selectedTaskType.value,
@@ -57,7 +57,7 @@ class TaskCreateView extends StatelessWidget {
               },
               decoration: const InputDecoration(labelText: AppStrings.taskType),
             ),
-            const SizedBox(height: 16.0),
+            Margins.verticalMargin16,
             ElevatedButton(
               onPressed: () {
                 taskController.createTask();
