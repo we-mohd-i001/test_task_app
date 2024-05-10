@@ -24,7 +24,7 @@ class TaskWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TimerController timerController = Get.put(TimerController());
     TaskController taskController = Get.put(TaskController());
-    Task task = taskController.taskList[taskId];
+
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: () {
@@ -48,7 +48,7 @@ class TaskWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(16), color: Colors.blue),
         child: Row(
           children: <Widget>[
-            TaskIcon(icon: getIcon(task.type)),
+            TaskIcon(icon: getIcon(taskController.taskList[taskId].type)),
             const SizedBox(width: 10),
             Expanded(
               child: Container(
@@ -62,8 +62,10 @@ class TaskWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    TaskTitle(title: task.title),
-                    TaskDescription(description: task.description),
+                    TaskTitle(title: taskController.taskList[taskId].title),
+                    TaskDescription(
+                        description:
+                            taskController.taskList[taskId].description),
                   ],
                 ),
               ),
@@ -74,12 +76,17 @@ class TaskWidget extends StatelessWidget {
                 Obx(() => TimerWidget(
                     time: (timerController.runningTaskId.value == -1 ||
                             timerController.runningTaskId.value != taskId)
-                        ? '${task.hours}:${task.minutes}:${task.seconds}'
+                        ? '${taskController.taskList[taskId].hours}:'
+                            '${taskController.taskList[taskId].minutes}:'
+                            '${taskController.taskList[taskId].seconds}'
                         : timerController.getTimeDurationString.value)),
                 Obx(
                   () => PlayPauseButton(
                       onPressed: () => timerController.playPauseTimer(
-                          taskId, task.minutes, task.hours, task.seconds),
+                          taskId,
+                          taskController.taskList[taskId].minutes,
+                          taskController.taskList[taskId].hours,
+                          taskController.taskList[taskId].seconds),
                       isPlaying: timerController.runningTaskId.value == -1
                           ? false
                           : timerController.isTimerRunning.value &&
