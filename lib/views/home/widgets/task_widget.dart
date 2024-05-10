@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/task/task_controller.dart';
 import '../../../controllers/timer/timer_controller.dart';
 import '../../../helpers/task_icon_helper.dart';
 import '../../../models/task/task.dart';
@@ -12,26 +13,26 @@ import 'task_icon.dart';
 import 'task_title.dart';
 
 class TaskWidget extends StatelessWidget {
-  final Task task;
-  final int index;
+  final int taskId;
 
   const TaskWidget({
     super.key,
-    required this.index,
-    required this.task,
+    required this.taskId,
   });
 
   @override
   Widget build(BuildContext context) {
     TimerController timerController = Get.put(TimerController());
+    TaskController taskController = Get.put(TaskController());
+    Task task = taskController.taskList[taskId];
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: () {
         Navigator.push(
           context,
           TaskView.route(
-            task: task,
-            index: index,
+            task: taskController.taskList[taskId],
+            index: taskId,
           ),
         );
       },
@@ -72,17 +73,17 @@ class TaskWidget extends StatelessWidget {
               children: [
                 Obx(() => TimerWidget(
                     time: (timerController.runningTaskId.value == -1 ||
-                            timerController.runningTaskId.value != index)
+                            timerController.runningTaskId.value != taskId)
                         ? '${task.hours}:${task.minutes}:${task.seconds}'
                         : timerController.getTimeDurationString.value)),
                 Obx(
                   () => PlayPauseButton(
                       onPressed: () => timerController.playPauseTimer(
-                          index, task.minutes, task.hours, task.seconds),
+                          taskId, task.minutes, task.hours, task.seconds),
                       isPlaying: timerController.runningTaskId.value == -1
                           ? false
                           : timerController.isTimerRunning.value &&
-                              timerController.runningTaskId.value == index),
+                              timerController.runningTaskId.value == taskId),
                 ),
               ],
             )

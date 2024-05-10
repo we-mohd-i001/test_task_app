@@ -45,7 +45,7 @@ class TimerController extends GetxController {
         taskController.upateTask(newTask, index);
       });
     } else if (runningTaskId.value != index && isTimerRunning.value) {
-      Get.snackbar('Error', 'Another Timer Running!',
+      Get.snackbar('Cannot Start Timer', 'Another Timer Running!',
           snackPosition: SnackPosition.BOTTOM);
     } else if (runningTaskId == index) {
       isTimerRunning(false);

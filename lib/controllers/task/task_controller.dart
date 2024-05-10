@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../models/task/task.dart';
 import '../../models/task/task_type.dart';
+import 'task_list_controller.dart';
 
 class TaskController extends GetxController {
   RxList<Task> taskList = <Task>[].obs;
@@ -13,6 +14,7 @@ class TaskController extends GetxController {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController minutesController = TextEditingController();
   final TextEditingController hourController = TextEditingController();
+  TaskListController taskListController = Get.find<TaskListController>();
 
   void createTask() {
     Task task = Task(
@@ -24,6 +26,7 @@ class TaskController extends GetxController {
       minutes: selectedMinutes.value,
       seconds: 0,
     );
+    taskListController.addTaskId(taskList.length);
     taskList.add(task);
   }
 
