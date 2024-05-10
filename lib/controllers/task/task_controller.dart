@@ -7,7 +7,40 @@ import '../../models/task/task.dart';
 import 'task_list_controller.dart';
 
 class TaskController extends GetxController {
-  RxList<Task> taskList = <Task>[].obs;
+  RxList<Task> taskList = <Task>[
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+    task1,
+    task2,
+    task3,
+    task4,
+  ].obs;
   RxInt selectedHours = 0.obs;
   RxInt selectedMinutes = 0.obs;
   RxString selectedTaskType = 'Other'.obs;

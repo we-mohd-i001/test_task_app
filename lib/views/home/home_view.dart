@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/constants.dart';
+import '../../controllers/task/task_controller.dart';
+import '../../controllers/task/task_list_controller.dart';
 import '../common_widgets/create_app_bar_widget.dart';
 import '../task/task_create_view.dart';
 import 'widgets/task_list_view.dart';
@@ -10,6 +13,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TaskListController taskListController = Get.put(TaskListController());
+    TaskController taskController = Get.put(TaskController());
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(

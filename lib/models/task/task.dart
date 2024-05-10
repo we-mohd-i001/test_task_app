@@ -41,3 +41,52 @@ class Task {
     );
   }
 }
+
+Task task1 = Task(
+    id: '',
+    hours: 5,
+    minutes: 5,
+    seconds: 5,
+    title: 'Some Title',
+    type: TaskType.codeRelated,
+    description:
+        'When using Lorem Ipsum for creating dummy content for your newly created website, you can select the text formats you want from the tool. Like, words, sentences, or paragraphs.'
+        'Then, you can select whether you want HTML markup in your dummy content or not'
+        'Then, you can choose the number of words and paragraphs for your dummy content and execute the plan accordingly.'
+        'You can use this tool at incrementors.com for free.');
+Task task2 = Task(
+    id: '',
+    hours: 5,
+    minutes: 5,
+    seconds: 5,
+    title: 'Some Title',
+    type: TaskType.uiRelated,
+    description:
+        'When using Lorem Ipsum for creating dummy content for your newly created website, you can select the text formats you want from the tool. Like, words, sentences, or paragraphs.'
+        'Then, you can select whether you want HTML markup in your dummy content or not'
+        'Then, you can choose the number of words and paragraphs for your dummy content and execute the plan accordingly.'
+        'You can use this tool at incrementors.com for free.');
+Task task3 = Task(
+    id: '',
+    hours: 5,
+    minutes: 5,
+    seconds: 5,
+    title: 'Some Title',
+    type: TaskType.analysis,
+    description:
+        'When using Lorem Ipsum for creating dummy content for your newly created website, you can select the text formats you want from the tool. Like, words, sentences, or paragraphs.'
+        'Then, you can select whether you want HTML markup in your dummy content or not'
+        'Then, you can choose the number of words and paragraphs for your dummy content and execute the plan accordingly.'
+        'You can use this tool at incrementors.com for free.');
+Task task4 = Task(
+    id: '',
+    hours: 5,
+    minutes: 5,
+    seconds: 5,
+    title: 'Some Title',
+    type: TaskType.other,
+    description:
+        'When using Lorem Ipsum for creating dummy content for your newly created website, you can select the text formats you want from the tool. Like, words, sentences, or paragraphs.'
+        'Then, you can select whether you want HTML markup in your dummy content or not'
+        'Then, you can choose the number of words and paragraphs for your dummy content and execute the plan accordingly.'
+        'You can use this tool at incrementors.com for free.');
