@@ -7,11 +7,9 @@ class TimerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        time,
-        style: TextStyle(fontSize: fontSize),
-      ),
+    return Text(
+      time,
+      style: TextStyle(fontSize: fontSize),
     );
   }
 }

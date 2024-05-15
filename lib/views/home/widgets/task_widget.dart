@@ -1,67 +1,101 @@
-import 'package:test_task_app/views/common_widgets/play_pause_button.dart';
-import 'package:test_task_app/views/common_widgets/timer_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/constants.dart';
-import '../../../helpers/helper.dart';
-import 'tags_widget.dart';
+import '../../../controllers/task/task_controller.dart';
+import '../../../controllers/timer/timer_controller.dart';
+import '../../../helpers/task_icon_helper.dart';
+import '../../common_widgets/play_pause_button.dart';
+import '../../common_widgets/timer_widget.dart';
+import '../../task/task_view.dart';
+import 'task_description.dart';
 import 'task_icon.dart';
 import 'task_title.dart';
 
 class TaskWidget extends StatelessWidget {
-  final String title;
-  final TaskType type;
-  final List<String>? tags;
-  final void Function()? onPressed;
+  final int taskId;
 
-  const TaskWidget(
-      {super.key,
-      required this.title,
-      this.tags,
-      required this.type,
-      this.onPressed});
+  const TaskWidget({
+    super.key,
+    required this.taskId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    TimerController timerController = Get.put(TimerController());
+    TaskController taskController = Get.put(TaskController());
+
     return MaterialButton(
       padding: EdgeInsets.zero,
-      onPressed: onPressed ?? () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          TaskView.route(
+            task: taskController.taskList[taskId],
+            index: taskId,
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         constraints: const BoxConstraints(
-            maxHeight: 100,
-            maxWidth: double.infinity,
-            minHeight: 100,
-            minWidth: 100),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.blue,
+          maxHeight: 100,
+          maxWidth: double.infinity,
+          minHeight: 100,
+          minWidth: 100,
         ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.blue),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            TaskIcon(icon: getIcon(type) ?? Icons.sticky_note_2),
-            Container(
-              constraints: BoxConstraints(
+            TaskIcon(icon: getIcon(taskController.taskList[taskId].type)),
+            Margins.horizontalMargin10,
+            Expanded(
+              child: Container(
+                constraints: BoxConstraints(
                   maxHeight: 100,
                   minWidth: 80,
                   maxWidth: MediaQuery.of(context).size.width * 0.6,
-                  minHeight: 100),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  TaskTitle(title: title),
-                  const TagsWidget(
-                    tags: ['Computer', 'Science', 'Flutter'],
-                  ),
-                ],
+                  minHeight: 100,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    TaskTitle(title: taskController.taskList[taskId].title),
+                    TaskDescription(
+                      description: taskController.taskList[taskId].description,
+                    ),
+                  ],
+                ),
               ),
             ),
-            const Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TimerWidget(time: '12:00'),
-                PlayPauseButton(isPlaying: true),
+                Obx(
+                  () => TimerWidget(
+                    time: (timerController.runningTaskId.value == -1 ||
+                            timerController.runningTaskId.value != taskId)
+                        ? '${taskController.taskList[taskId].hours}:'
+                            '${taskController.taskList[taskId].minutes}:'
+                            '${taskController.taskList[taskId].seconds}'
+                        : timerController.getTimeDurationString.value,
+                  ),
+                ),
+                Obx(
+                  () => PlayPauseButton(
+                    onPressed: () => timerController.playPauseTimer(
+                      taskId,
+                      taskController.taskList[taskId].minutes,
+                      taskController.taskList[taskId].hours,
+                      taskController.taskList[taskId].seconds,
+                    ),
+                    isPlaying: timerController.runningTaskId.value == -1
+                        ? false
+                        : timerController.isTimerRunning.value &&
+                            timerController.runningTaskId.value == taskId,
+                  ),
+                ),
               ],
             )
           ],

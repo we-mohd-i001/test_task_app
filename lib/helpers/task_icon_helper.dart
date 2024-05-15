@@ -1,7 +1,9 @@
-import '../constants/constants.dart';
+import 'package:flutter/material.dart';
 
-// Helper function to geticon according to the type
-IconData? getIcon(type) {
+import '../models/task/task_type.dart';
+
+// Helper function to get icon according to the task type
+IconData getIcon(TaskType type) {
   switch (type) {
     case TaskType.uiRelated:
       return Icons.design_services_outlined;
