@@ -44,8 +44,7 @@ class TaskWidget extends StatelessWidget {
           minHeight: 100,
           minWidth: 100,
         ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16), color: Colors.blue),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.blue),
         child: Row(
           children: <Widget>[
             TaskIcon(icon: getIcon(taskController.taskList[taskId].type)),
@@ -64,8 +63,8 @@ class TaskWidget extends StatelessWidget {
                   children: <Widget>[
                     TaskTitle(title: taskController.taskList[taskId].title),
                     TaskDescription(
-                        description:
-                            taskController.taskList[taskId].description),
+                      description: taskController.taskList[taskId].description,
+                    ),
                   ],
                 ),
               ),
@@ -73,24 +72,29 @@ class TaskWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Obx(() => TimerWidget(
+                Obx(
+                  () => TimerWidget(
                     time: (timerController.runningTaskId.value == -1 ||
                             timerController.runningTaskId.value != taskId)
                         ? '${taskController.taskList[taskId].hours}:'
                             '${taskController.taskList[taskId].minutes}:'
                             '${taskController.taskList[taskId].seconds}'
-                        : timerController.getTimeDurationString.value)),
+                        : timerController.getTimeDurationString.value,
+                  ),
+                ),
                 Obx(
                   () => PlayPauseButton(
-                      onPressed: () => timerController.playPauseTimer(
-                          taskId,
-                          taskController.taskList[taskId].minutes,
-                          taskController.taskList[taskId].hours,
-                          taskController.taskList[taskId].seconds),
-                      isPlaying: timerController.runningTaskId.value == -1
-                          ? false
-                          : timerController.isTimerRunning.value &&
-                              timerController.runningTaskId.value == taskId),
+                    onPressed: () => timerController.playPauseTimer(
+                      taskId,
+                      taskController.taskList[taskId].minutes,
+                      taskController.taskList[taskId].hours,
+                      taskController.taskList[taskId].seconds,
+                    ),
+                    isPlaying: timerController.runningTaskId.value == -1
+                        ? false
+                        : timerController.isTimerRunning.value &&
+                            timerController.runningTaskId.value == taskId,
+                  ),
                 ),
               ],
             )
